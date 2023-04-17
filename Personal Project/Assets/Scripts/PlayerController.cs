@@ -5,49 +5,52 @@ using System.Reflection; //Use for
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody playerRb;
-    private float verticalInput;
-    private float horizontalInput;
+    private Rigidbody rb;
+    private float xMove;
+    private float zMove;
     [SerializeField] float speed = 10;
-    [SerializeField] float topSpeed = 1000.0f;
+    //[SerializeField] float topSpeed = 1000.0f;
     public float jumpForce = 900;
     public bool isOnGround = true;
     public float gravityModifier;
-    public bool isFast = false;
+    public float strength;
+    public float maxSpeed;
+    //public bool isFast = false;
 
 
     void Start()
     {
-        playerRb = GetComponent<Rigidbody>();  
+        rb = GetComponent<Rigidbody>();  
         Physics.gravity *= gravityModifier;
     }
 
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        zMove = Input.GetAxis("Horizontal");
+        xMove = Input.GetAxis("Vertical");
 
         //Player Movement on the x and z axis
-        if (isOnGround) 
+        if (isOnGround)
         {
-            playerRb.AddRelativeForce(Vector3.forward * speed * verticalInput);
-            playerRb.AddRelativeForce(Vector3.right * speed / 2 * horizontalInput);
+            rb.AddRelativeForce(Vector3.forward * speed * xMove);
+            rb.AddRelativeForce(Vector3.right * speed * zMove);
         }
         else
         {
-            playerRb.AddRelativeForce(Vector3.forward * speed /2 * verticalInput);
-            playerRb.AddRelativeForce(Vector3.right * speed /4 * horizontalInput);
+            rb.AddRelativeForce(Vector3.forward * speed / 2 * xMove);
+            rb.AddRelativeForce(Vector3.right * speed / 2 * zMove);
         }
+
         //Limits the max velocity of the player
-        if (playerRb.velocity.magnitude > topSpeed)
-        {
-           isFast = true;
-            playerRb.velocity = playerRb.velocity.normalized * topSpeed;
-        }
-        else
-        {
-            isFast = false;
-        }
+        //if (rb.velocity.magnitude > topSpeed)
+        //{
+        //   isFast = true;
+        //    rb.velocity = rb.velocity.normalized * topSpeed;
+        //}
+        //else
+        //{
+        //    isFast = false;
+        //}
 
         if (Input.GetKey("space") && isOnGround)
         {
@@ -62,7 +65,7 @@ public class PlayerController : MonoBehaviour
     
     void Jump()
     {
-        playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isOnGround = false;
     }    
 
