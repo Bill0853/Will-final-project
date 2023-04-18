@@ -8,14 +8,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float xMove;
     private float zMove;
+    private bool isOnGround = true;
+    [SerializeField] float strength;
     [SerializeField] float speed = 10;
-    //[SerializeField] float topSpeed = 1000.0f;
+    [SerializeField] float targetSpeed;
     public float jumpForce = 900;
-    public bool isOnGround = true;
     public float gravityModifier;
-    public float strength;
-    public float maxSpeed;
-    //public bool isFast = false;
+    
 
 
     void Start()
@@ -41,16 +40,9 @@ public class PlayerController : MonoBehaviour
             rb.AddRelativeForce(Vector3.right * speed / 2 * zMove);
         }
 
-        //Limits the max velocity of the player
-        //if (rb.velocity.magnitude > topSpeed)
-        //{
-        //   isFast = true;
-        //    rb.velocity = rb.velocity.normalized * topSpeed;
-        //}
-        //else
-        //{
-        //    isFast = false;
-        //}
+        if (isOnGround = false) { ApplyGravity(); }
+
+
 
         if (Input.GetKey("space") && isOnGround)
         {
@@ -69,9 +61,9 @@ public class PlayerController : MonoBehaviour
         isOnGround = false;
     }    
 
-    private void OnCollisionEnter(Collision collision) { isOnGround = true; }
-        
-    
+    private void OnCollisionEnter(Collision collision) { isOnGround = true;}
+
+    private void ApplyGravity();
    
     public void ClearLog() //Clear Debug Console
     {
