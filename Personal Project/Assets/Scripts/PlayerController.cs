@@ -9,9 +9,7 @@ public class PlayerController : MonoBehaviour
     private float xMove;
     private float zMove;
     private bool isOnGround = true;
-    [SerializeField] float strength;
     [SerializeField] float speed = 10;
-    [SerializeField] float targetSpeed;
     public float jumpForce = 900;
     public float gravityModifier;
     
@@ -19,8 +17,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();  
-        Physics.gravity *= gravityModifier;
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -29,19 +26,10 @@ public class PlayerController : MonoBehaviour
         xMove = Input.GetAxis("Vertical");
 
         //Player Movement on the x and z axis
-        if (isOnGround)
-        {
-            rb.AddRelativeForce(Vector3.forward * speed * xMove);
-            rb.AddRelativeForce(Vector3.right * speed * zMove);
-        }
-        else
-        {
-            rb.AddRelativeForce(Vector3.forward * speed / 2 * xMove);
-            rb.AddRelativeForce(Vector3.right * speed / 2 * zMove);
-        }
-
-        if (isOnGround = false) { ApplyGravity(); }
-
+        rb.AddRelativeForce(Vector3.forward * speed * xMove);
+        rb.AddRelativeForce(Vector3.right * speed * zMove);
+        
+       
 
 
         if (Input.GetKey("space") && isOnGround)
@@ -49,7 +37,7 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-            if (Input.GetKey("c"))
+        if (Input.GetKey("c"))
         { 
             ClearLog();
         }    
@@ -59,12 +47,20 @@ public class PlayerController : MonoBehaviour
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isOnGround = false;
+        ApplyGravity();
     }    
 
-    private void OnCollisionEnter(Collision collision) { isOnGround = true;}
+    private void OnCollisionEnter(Collision collision) { isOnGround = true; NoGravity();  }
 
-    private void ApplyGravity();
-   
+    //private void ApplyGravity()
+    //{
+    //    Physics.gravity *= gravityModifier);
+    //}
+    //private void NoGravity()
+    //{
+    //    Physics.gravity /= gravityModifier);
+    //}
+
     public void ClearLog() //Clear Debug Console
     {
         var assembly = Assembly.GetAssembly(typeof(UnityEditor.Editor));
