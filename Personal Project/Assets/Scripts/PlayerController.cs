@@ -52,14 +52,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision) { isOnGround = true; NoGravity();  }
 
-    //private void ApplyGravity()
-    //{
-    //    Physics.gravity *= gravityModifier);
-    //}
-    //private void NoGravity()
-    //{
-    //    Physics.gravity /= gravityModifier);
-    //}
+    private void ApplyGravity()
+    {
+        Physics.gravity *= gravityModifier;
+    }
+    private void NoGravity()
+    {
+        Physics.gravity /= gravityModifier;
+    }
 
     public void ClearLog() //Clear Debug Console
     {
