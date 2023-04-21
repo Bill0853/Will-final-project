@@ -8,11 +8,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float xMove;
     private float zMove;
-    private bool isOnGround = true;
-    [SerializeField] float speed = 10;
+    
+    public float speed = 10;
     public float jumpForce = 900;
     public float gravityModifier;
-    
+    public float fallSpeed;
+
+    public LayerMask groundLayer;
 
 
     void Start()
@@ -29,36 +31,30 @@ public class PlayerController : MonoBehaviour
         //Player Movement on the x and z axis
         rb.AddRelativeForce(Vector3.forward * speed * xMove);
         rb.AddRelativeForce(Vector3.right * speed * zMove);
-        
        
+            //&& IsGrounded())
+    }
 
+    bool IsGrounded()
+    {
+        Vector2 position = transform.position;
+        Vector2 direction = Vector2.down;
+        float distance = 1.0f;
 
-        if (Input.GetKey("space") && isOnGround)
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
+        if (hit.collider != null)
         {
-            Jump();
+            return true;
         }
 
-        if (Input.GetKey("c"))
-        { 
-            ClearLog();
-        }    
+        return false;
     }
-    
+
     void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        isOnGround = false;
-
-    }    
-
-    private void OnCollisionEnter(Collision collision) { isOnGround = true; }
-
-
-    public void ClearLog() //Clear Debug Console
-    {
-        var assembly = Assembly.GetAssembly(typeof(UnityEditor.Editor));
-        var type = assembly.GetType("UnityEditor.LogEntries");
-        var method = type.GetMethod("Clear");
-        method.Invoke(new object(), null);
     }
+
+   
+   
 }
