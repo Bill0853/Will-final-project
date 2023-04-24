@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
     public float fallSpeed;
 
     public LayerMask groundLayer;
-
+    public float distToGround = 0.1f;
+    public bool groundedTest = false;
 
     void Start()
     {
@@ -31,24 +32,25 @@ public class PlayerController : MonoBehaviour
         //Player Movement on the x and z axis
         rb.AddRelativeForce(Vector3.forward * speed * xMove);
         rb.AddRelativeForce(Vector3.right * speed * zMove);
-       
-            //&& IsGrounded())
+        if (Input.GetKey("space"))
+        if (Input.GetKeyDown("space") && IsGrounded())
+        {
+            Jump();
+        }
+        if (IsGrounded()) 
+        {
+            groundedTest = true;
+        }   
+        if (!IsGrounded()) { 
+            rb.AddRelativeForce(-Vector3.up * gravityModifier * fallSpeed * Time.deltaTime);
+            groundedTest = false; }
     }
-
     bool IsGrounded()
     {
-        Vector2 position = transform.position;
-        Vector2 direction = Vector2.down;
-        float distance = 1.0f;
-
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
-        if (hit.collider != null)
-        {
-            return true;
-        }
-
-        return false;
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
+    //bool IsGrounded()
+    //{Vector3 position = transform.position; Vector3 direction = Vector3.down;        float distance = 1.0f;        RaycastHit hit = Physics.Raycast(position, direction, distance, groundLayer);        if (hit.collider != null) { return true; }        return false; }
 
     void Jump()
     {
