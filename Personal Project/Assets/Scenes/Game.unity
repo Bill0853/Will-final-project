@@ -580,8 +580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c25e1258e58b5814e936087b537f2cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
-  jumpForce: 600
   gravityModifier: 0.5
   fallSpeed: 100000
   groundLayer:
@@ -589,6 +587,7 @@ MonoBehaviour:
     m_Bits: 64
   distToGround: 1
   groundedTest: 0
+  playerOpen: 0
 --- !u!1 &470877669
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,6 +832,7 @@ GameObject:
   - component: {fileID: 603474970}
   - component: {fileID: 603474969}
   - component: {fileID: 603474968}
+  - component: {fileID: 603474972}
   m_Layer: 6
   m_Name: Chest (1)
   m_TagString: Chest
@@ -918,6 +918,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &603474972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603474967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975b6bcbd06d7c14d8900424faa8ed98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerOpen: {fileID: 468566164}
 --- !u!1 &734210927
 GameObject:
   m_ObjectHideFlags: 0

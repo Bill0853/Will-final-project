@@ -9,14 +9,16 @@ public class PlayerController : MonoBehaviour
     private float xMove;
     private float zMove;
     
-    public float speed = 10;
-    public float jumpForce = 900;
-    public float gravityModifier;
-    public float fallSpeed;
+    private float speed = 500;
+    private float jumpForce = 600;
+    public float gravityModifier = 0.5f;
+    public float fallSpeed = 100000;
 
     public LayerMask groundLayer;
-    public float distToGround = 0.1f;
+    public float distToGround = 1;
     public bool groundedTest = false;
+
+    public bool playerOpen = false;
 
     void Start()
     {
@@ -43,14 +45,25 @@ public class PlayerController : MonoBehaviour
         }   
         if (!IsGrounded()) { 
             rb.AddRelativeForce(-Vector3.up * gravityModifier * fallSpeed * Time.deltaTime);
-            groundedTest = false; }
+            groundedTest = false; 
+        }
+
+
+
+        //Player interactions with interactables
+        if (Input.GetKey("f"))
+        { playerOpen = true; }
+        else { playerOpen = false; }
     }
+
+
     bool IsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
-    //bool IsGrounded()
-    //{Vector3 position = transform.position; Vector3 direction = Vector3.down;        float distance = 1.0f;        RaycastHit hit = Physics.Raycast(position, direction, distance, groundLayer);        if (hit.collider != null) { return true; }        return false; }
+    
+    
+
 
     void Jump()
     {
