@@ -4,23 +4,40 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    protected bool PlayerNear;
-    //public ObjectOpen objectOpen;
-    public PlayerController playerOpen;
-
-
+    [SerializeField] bool playerNear;
+    public int[] powers; 
     // Start is called before the first frame update
     void Start()
     {
-           
+        
     }
 
     // Update is called once per frame
     void Update()
-    {
-       if (playerOpen)
+    {    
+        if (Input.GetKey("f") && playerNear)
         {
-            Destroy(gameObject);
+            OpenInteractable();
         }
     }
+
+    void OpenInteractable()
+    {
+        SpawnPower();
+        
+        
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == ("Player")) 
+        { playerNear = true;}
+    }
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.tag == ("Player"))
+        { playerNear = false; }
+    }
+
+    public void SpawnPower();
 }

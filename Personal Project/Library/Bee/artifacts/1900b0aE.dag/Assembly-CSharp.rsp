@@ -348,6 +348,7 @@
 "Assets/Scripts/InteractableObject.cs"
 "Assets/Scripts/MouseLook.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/PowerupManager.cs"
 -langversion:9.0
 
 /deterministic
