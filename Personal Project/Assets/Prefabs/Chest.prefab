@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3937353168735523948}
   - component: {fileID: 3689111744853747960}
   - component: {fileID: 3937353168735523944}
+  - component: {fileID: -1315208743385360514}
   m_Layer: 6
   m_Name: Chest
   m_TagString: Chest
@@ -125,3 +126,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNear: 0
+  powerUps:
+  - {fileID: 6915709241464123113, guid: c1d20ab6cc860a144b188320fc48e872, type: 3}
+  - {fileID: 1957104556586048945, guid: 38ac1646cacd039408571a4fc30e9781, type: 3}
+--- !u!54 &-1315208743385360514
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3937353168735523939}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
