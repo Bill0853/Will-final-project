@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public float spawnDelay;
-    public float spawnInterval;
+    //public float spawnDelay;
+    //public float spawnInterval;
 
     public float xRange;
     public float ySpawn = 15.0f;
@@ -13,17 +13,24 @@ public class SpawnManager : MonoBehaviour
     private Vector3 randomSpawn;
 
     public GameObject chest;
-
+    public int spawnedChests = 1;
+    public int maxChests = 5;
+    
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnChest", spawnDelay, spawnInterval );
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (spawnedChests < maxChests) 
+        {
+            spawnedChests++;
+            SpawnChest();
+            //InvokeRepeating("SpawnChest", spawnDelay, spawnInterval); 
+        }
     }
 
     void SpawnChest()
@@ -31,6 +38,8 @@ public class SpawnManager : MonoBehaviour
         RandomLocation();
         Instantiate(chest, randomSpawn, Quaternion.identity);
     }
+    
+    
 
     void RandomLocation()
     {
@@ -39,5 +48,7 @@ public class SpawnManager : MonoBehaviour
         var zSpawn = Random.Range(-zRange, zRange);
         randomSpawn = new Vector3(xSpawn, ySpawn, zSpawn);
     }
+
+    
    
 }

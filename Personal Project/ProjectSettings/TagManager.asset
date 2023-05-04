@@ -6,7 +6,11 @@ TagManager:
   tags:
   - Ground
   - Chest
-  - Enemy
+  - PowerupSpeed
+  - PowerupJump
+  - EnemyFlySmall
+  - EnemyGroundMedium
+  - EnemyGroundLarge
   layers:
   - Default
   - TransparentFX
