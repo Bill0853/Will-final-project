@@ -7,12 +7,11 @@ public class InteractableObject : MonoBehaviour
     [SerializeField] bool playerNear;
     [SerializeField] GameObject[] powerUps;
     public int spawnedChests;
-    public SpawnManager spawnManager;
     private bool isOpen;
+    public Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        spawnManager = GetComponent<SpawnManager>();
         isOpen = false;
     }
 
@@ -47,6 +46,12 @@ public class InteractableObject : MonoBehaviour
         if (collision.gameObject.tag == ("Player"))
         { playerNear = false; }
     }
-    
+     void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == ("Ground"))
+        {
+            rb.constraints = RigidbodyConstraints.FreezePosition;
+        }
+    }
 
 }

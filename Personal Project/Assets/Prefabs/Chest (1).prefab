@@ -130,7 +130,7 @@ MonoBehaviour:
   - {fileID: 6915709241464123113, guid: c1d20ab6cc860a144b188320fc48e872, type: 3}
   - {fileID: 1957104556586048945, guid: 38ac1646cacd039408571a4fc30e9781, type: 3}
   spawnedChests: 1
-  spawnManager: {fileID: 3747069703854978296, guid: 091dbccd7364d9141843c7d55eab0b73, type: 3}
+  rb: {fileID: 5871837149225687856}
 --- !u!54 &5871837149225687856
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -145,5 +145,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0

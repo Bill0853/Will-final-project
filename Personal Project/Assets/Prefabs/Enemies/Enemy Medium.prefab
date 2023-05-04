@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 7594125391899335576}
   - component: {fileID: 7594125391899335579}
   - component: {fileID: 7594125391899335578}
+  - component: {fileID: -1500749084711370258}
+  - component: {fileID: 7383755722226913486}
   m_Layer: 0
   m_Name: Enemy Medium
-  m_TagString: Enemy
+  m_TagString: EnemyGroundMedium
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,3 +100,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &-1500749084711370258
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7594125391899335573}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 25
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7383755722226913486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7594125391899335573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbaea66ef9bfe1a489e1fcf9728135aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyspeed: 5
+  health: 90
+  player: {fileID: 0}
+  playerNear: 0
+  triggerCollider: {fileID: -1500749084711370258}
