@@ -349,6 +349,7 @@
 "Assets/Scripts/InteractableObject.cs"
 "Assets/Scripts/Player/MouseLook.cs"
 "Assets/Scripts/Player/PlayerController.cs"
+"Assets/Scripts/Projectile.cs"
 "Assets/Scripts/SpawnManager.cs"
 -langversion:9.0
 

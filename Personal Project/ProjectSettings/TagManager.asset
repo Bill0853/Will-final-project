@@ -11,6 +11,7 @@ TagManager:
   - EnemyFlySmall
   - EnemyGroundMedium
   - EnemyGroundLarge
+  - Projectile
   layers:
   - Default
   - TransparentFX
