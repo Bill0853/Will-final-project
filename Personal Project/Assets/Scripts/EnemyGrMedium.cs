@@ -30,11 +30,11 @@ public class EnemyGrMedium : MonoBehaviour
     }
 
     void Update()
-    { 
-        timer += Time.deltaTime;
+    {
         
         if (playerNear)
         {
+            timer += Time.deltaTime;
             transform.LookAt(player.transform.position);
             
             //attack manager
@@ -75,8 +75,7 @@ public class EnemyGrMedium : MonoBehaviour
     }
     void LaunchProjectile() 
     { 
-        Instantiate(projectile, rb.transform.position);
-        
+        Instantiate(projectile, transform.position, Quaternion.identity);
     }
 
 }
