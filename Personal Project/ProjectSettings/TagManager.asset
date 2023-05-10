@@ -12,6 +12,7 @@ TagManager:
   - EnemyGroundMedium
   - EnemyGroundLarge
   - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX

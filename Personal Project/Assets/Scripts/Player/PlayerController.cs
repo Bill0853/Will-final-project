@@ -8,20 +8,23 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float xMove;
     private float zMove;
-    
+
     private float speed = 450;
     private float jumpForce = 600;
     private float gravityModifier = 0.5f;
     private float fallSpeed = 100000;
+    public float health = 100;
     private LayerMask groundLayer;
     private float distToGround = 1;
 
+    private float devInvincible = 0;
+
     [SerializeField] float powerUpSpeed = 0;
     [SerializeField] float powerUpJump = 0;
-    
 
-    
-    
+
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -33,17 +36,35 @@ public class PlayerController : MonoBehaviour
         zMove = Input.GetAxis("Horizontal");
         xMove = Input.GetAxis("Vertical");
 
-        //Player Movement on the x and z axis
+
         rb.AddRelativeForce(Vector3.forward * speed * (powerUpSpeed + 1) * xMove);
         rb.AddRelativeForce(Vector3.right * speed * (powerUpJump + 1) * zMove);
+
         if (Input.GetKeyDown("space") && IsGrounded())
         {
             Jump();
         }
-       
-        if (!IsGrounded()) { 
+
+
+        if (!IsGrounded())
+        {
             rb.AddRelativeForce(-Vector3.up * gravityModifier * fallSpeed * Time.deltaTime);
         }
+
+
+        if (health <= 0)
+        {
+            if (devInvincible < 1) 
+            {
+                Destroy(gameObject); 
+            }
+        }
+
+        if (Input.GetKeyDown("p"))
+        {
+            devInvincible += 1;
+        }
+
     }
 
 
@@ -61,15 +82,24 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == ("PowerupJump"))
-        { 
+        {
             powerUpJump += 0.2f;
-            Destroy (collision.gameObject);
+            Destroy(collision.gameObject);
         }
-        if (collision.gameObject.tag == ("PowerupSpeed"))
+        else if (collision.gameObject.tag == ("PowerupSpeed"))
         {
             powerUpSpeed += 0.15f;
             Destroy(collision.gameObject);
         }
+        else if (collision.gameObject.tag == ("Projectile"))
+        {
+            health -= 20.0f;
+            Destroy(collision.gameObject);
+        }
+        
+
+
     }
 
+    
 }

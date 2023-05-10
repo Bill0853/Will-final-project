@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
             transform.LookAt(target.transform.position); 
         }
         transform.Translate(Vector3.forward * projectileSpeed * Time.deltaTime);
-        if (timer > 10) { Destroy(gameObject); }
+        if (timer > 4) { Destroy(gameObject); }
     }
     
     void Awake() 
@@ -39,7 +39,7 @@ public class Projectile : MonoBehaviour
     
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == ("Player"))
+        if (collision.gameObject.tag != ("Enemy"))
         {
             Destroy(gameObject);
         }

@@ -24,6 +24,7 @@ public class InteractableObject : MonoBehaviour
 
         if (isOpen == true)
         {
+            
             Destroy(gameObject);
         }
     }
