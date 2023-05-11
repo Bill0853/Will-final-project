@@ -13,6 +13,8 @@ TagManager:
   - EnemyGroundLarge
   - Projectile
   - Enemy
+  - Scoretext
+  - Healthtext
   layers:
   - Default
   - TransparentFX

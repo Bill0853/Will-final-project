@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] float waveSpawnDelay = 15;
-    [SerializeField] float enemysToSpawn = 3;
+    [SerializeField] float enemysToSpawn = 0;
     [SerializeField] float waveTimer;
+    public float waveCounter;
+    public TMP_Text waveCounterText;
     public GameObject enemy;
-    public float x;
 
     public float xRange;
-    public float ySpawn = 15.0f;
     public float zRange;
     private Vector3 randomSpawn;
 
@@ -36,20 +37,22 @@ public class SpawnManager : MonoBehaviour
             maxChests++;
         }
 
-        if (spawnedChests < maxChests)
-        {
-            spawnedChests++;
-            SpawnChest();
-
-        }
+        
 
         if (waveTimer > waveSpawnDelay)
         {
             SpawnWave();
             waveTimer = 0;
         }
-         
-        
+
+        waveCounterText.text = waveCounter.ToString("0");
+
+        if (spawnedChests < maxChests)
+        {
+            spawnedChests++;
+            SpawnChest();
+
+        }
     }
 
     void SpawnChest()
@@ -64,11 +67,12 @@ public class SpawnManager : MonoBehaviour
     {
         var xSpawn = Random.Range(-xRange, xRange);
         var zSpawn = Random.Range(-zRange, zRange);
-        randomSpawn = new Vector3(xSpawn, ySpawn, zSpawn);
+        randomSpawn = new Vector3(xSpawn, 10, zSpawn);
     }
 
     void SpawnWave()
     {
+        waveCounter ++;
         enemysToSpawn = enemysToSpawn + 1;
         moreChest = moreChest + 1;
         for (int i = 0; i < enemysToSpawn; i++) { SpawnEnemy(); }

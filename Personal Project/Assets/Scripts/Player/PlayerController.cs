@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Reflection; //Use for 
+using System.Reflection;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,20 +10,23 @@ public class PlayerController : MonoBehaviour
     private float xMove;
     private float zMove;
 
+    public float health = 100;
+    public TMP_Text healthText;
+        
     private float speed = 450;
     private float jumpForce = 600;
     private float gravityModifier = 0.5f;
     private float fallSpeed = 100000;
-    public float health = 100;
     private LayerMask groundLayer;
     private float distToGround = 1;
 
     private float devInvincible = 0;
-
+    public TMP_Text godModeText;
+    
     [SerializeField] float powerUpSpeed = 0;
     [SerializeField] float powerUpJump = 0;
 
-
+    public static bool isPlaying;
 
 
     void Start()
@@ -40,12 +44,13 @@ public class PlayerController : MonoBehaviour
         rb.AddRelativeForce(Vector3.forward * speed * (powerUpSpeed + 1) * xMove);
         rb.AddRelativeForce(Vector3.right * speed * (powerUpJump + 1) * zMove);
 
+        healthText.text = "HP: " + health.ToString("0");
+
         if (Input.GetKeyDown("space") && IsGrounded())
         {
             Jump();
         }
-
-
+        
         if (!IsGrounded())
         {
             rb.AddRelativeForce(-Vector3.up * gravityModifier * fallSpeed * Time.deltaTime);
@@ -60,9 +65,15 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown("p"))
+        if (Input.GetKeyDown(".") && devInvincible < 1)
         {
             devInvincible += 1;
+            godModeText.SetText("GODMODE!");
+        }
+        if (Input.GetKeyDown(".") && devInvincible > 0)
+        {
+            devInvincible -= 1;
+            godModeText.SetText("");
         }
 
     }
