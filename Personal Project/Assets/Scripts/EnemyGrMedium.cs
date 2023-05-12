@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyGrMedium : MonoBehaviour
 {
-        
-    [SerializeField] float enemyspeed = 5.0f;
-    [SerializeField] float health = 90.0f;
+    
+
     private bool playerNear;
-    private float radius = 20;
+    private float radius = 30;
 
     private GameObject rb;
     [SerializeField] SphereCollider triggerCollider;
@@ -27,7 +27,6 @@ public class EnemyGrMedium : MonoBehaviour
         player = GameObject.Find("Player");
         timer = 0;
         attack = true;
-
     }
 
     void Update()
@@ -38,11 +37,7 @@ public class EnemyGrMedium : MonoBehaviour
             timer += Time.deltaTime;
             transform.LookAt(player.transform.position);
             
-            //attack manager
-            // Add the time since Update was last called to the timer.
-           
-
-            // This will trigger an action every 2 seconds
+            
             if (attack && timer >= launchDelay)
             {
                 timer -= launchDelay;
@@ -61,7 +56,7 @@ public class EnemyGrMedium : MonoBehaviour
         if (collision.gameObject.tag == ("Player"))
         {
             playerNear = true;
-            triggerCollider.radius = radius + 10;
+            triggerCollider.radius = radius + 15;
 
 
         }
@@ -74,9 +69,18 @@ public class EnemyGrMedium : MonoBehaviour
             triggerCollider.radius = radius;
         }
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == ("Player"))
+        {
+            
+            Destroy(gameObject);
+        }
+    }
     void LaunchProjectile() 
     { 
         Instantiate(projectile, transform.position, Quaternion.identity);
     }
-
+    
+    
 }

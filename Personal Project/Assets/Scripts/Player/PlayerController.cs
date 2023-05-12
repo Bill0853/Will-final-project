@@ -12,7 +12,10 @@ public class PlayerController : MonoBehaviour
 
     public float health = 100;
     public TMP_Text healthText;
-        
+
+    public float kills;
+    public TMP_Text killsText;
+
     private float speed = 450;
     private float jumpForce = 600;
     private float gravityModifier = 0.5f;
@@ -45,7 +48,9 @@ public class PlayerController : MonoBehaviour
         rb.AddRelativeForce(Vector3.right * speed * (powerUpJump + 1) * zMove);
 
         healthText.text = "HP: " + health.ToString("0");
-
+        
+        if (health <= 0) { Dies(); }
+        
         if (Input.GetKeyDown("space") && IsGrounded())
         {
             Jump();
@@ -56,14 +61,7 @@ public class PlayerController : MonoBehaviour
             rb.AddRelativeForce(-Vector3.up * gravityModifier * fallSpeed * Time.deltaTime);
         }
 
-
-        if (health <= 0)
-        {
-            if (devInvincible < 1) 
-            {
-                Destroy(gameObject); 
-            }
-        }
+        
 
         if (Input.GetKeyDown(".") && devInvincible < 1)
         {
@@ -78,6 +76,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void Dies()
+    {
+        Destroy(gameObject);
+    }
 
     bool IsGrounded()
     {
@@ -92,9 +94,9 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == ("PowerupJump"))
+        if (collision.gameObject.tag == ("Projectile"))
         {
-            powerUpJump += 0.2f;
+            health -= 20.0f;
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.tag == ("PowerupSpeed"))
@@ -102,15 +104,16 @@ public class PlayerController : MonoBehaviour
             powerUpSpeed += 0.15f;
             Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.tag == ("Projectile"))
+        else if (collision.gameObject.tag == ("PowerupJump"))
         {
-            health -= 20.0f;
+            powerUpJump += 0.2f;
             Destroy(collision.gameObject);
         }
-        
-
-
+        else if (collision.gameObject.tag == ("PowerupHeal"))
+        {
+            health += 20.0f;
+            Destroy(collision.gameObject);
+        }
     }
-
     
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7594125391899335578}
   - component: {fileID: -1500749084711370258}
   - component: {fileID: 7383755722226913486}
-  - component: {fileID: 4898677455854101060}
+  - component: {fileID: 810202239}
   m_Layer: 0
   m_Name: Enemy Medium
   m_TagString: Enemy
@@ -126,15 +126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaea66ef9bfe1a489e1fcf9728135aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyspeed: 5
-  health: 90
   triggerCollider: {fileID: -1500749084711370258}
   player: {fileID: 0}
-  projectile: {fileID: 0}
-  launchDelay: 3
+  projectile: {fileID: 3567552819546985792, guid: a6f9016104f63de439569adc93268646, type: 3}
+  launchDelay: 1
   attack: 0
   timer: 0
---- !u!54 &4898677455854101060
+--- !u!54 &810202239
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

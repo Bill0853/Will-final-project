@@ -129,6 +129,7 @@ MonoBehaviour:
   powerUps:
   - {fileID: 6915709241464123113, guid: c1d20ab6cc860a144b188320fc48e872, type: 3}
   - {fileID: 1957104556586048945, guid: 38ac1646cacd039408571a4fc30e9781, type: 3}
+  - {fileID: 1125884226250100057, guid: 66ddffb9f9b3a4c42baeb737c4ec4fd3, type: 3}
   spawnedChests: 1
   rb: {fileID: 5871837149225687856}
 --- !u!54 &5871837149225687856
